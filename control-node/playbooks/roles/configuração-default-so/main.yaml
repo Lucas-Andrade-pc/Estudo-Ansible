@@ -1,7 +1,7 @@
 - name: Upgrande de todos os pacotes do s.o
   yum:
-  name: '*'
-  state: latest
+    name: '*'
+    state: latest
 
 - name: instalação do git client
   yum:
