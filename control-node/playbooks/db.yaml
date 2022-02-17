@@ -1,22 +1,25 @@
----
-- name: Configurar servidor de banco de dados
-  hosts: db01
+--- #inicio do arquivo yaml
+- name: Configurar servidor de banco de dados # nome do playbook
+  hosts: db01 # maquina de banco de dados
 
-  user: vagrant 
-  bacome: yes
-  var_file:
+  user: vagrant # usuario padrao criado pelo o vagrant
+  become: yes # para executar como root
+  vars_files: # diretorio de variaveis
     - vars/main.yaml
-  vars:
+  vars: # variaveis dentro do yaml
     - dbname: "db01"
     - dbusername: "root"
     - dbpassword: "root"
-  tasks:
-    - name: Configurar hosts lab ansible
-      lineinfile: line "{{item}}" path=/etc/hosts
-      with_items:
+  tasks: # task que vao ser executada nesse yaml
+    - name: Configurar hosts lab ansible # nome da taks
+      lineinfile:
+        dest: /etc/hosts
+        state: present
+        line: "{{item}}" # recebe uma lista de item 
+      with_items: # onde tem meus itens onde vai ser adicionado no etc/hosts
         - 192.168.1.2 contorle-node
         - 192.168.1.3 app01
         - 192.168.1.4 db01
-  roles:
-    - configuração-default-so
-    - role: geerlinggues.mysql
+  roles: # atividades que nao estao dentro das tasks
+    - configuracao-default-so
+    - role: geerlingguy.mysql

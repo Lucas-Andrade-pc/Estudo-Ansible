@@ -1,0 +1,9 @@
+- name: Upgrande de todos os pacotes do s.o # atividade 1
+  yum:
+    name: '*' # todos os pacotes
+    state: latest # status na ultima versao
+
+- name: instalação do git client # atividade 2
+  yum:
+    name: git
+    state: latest
