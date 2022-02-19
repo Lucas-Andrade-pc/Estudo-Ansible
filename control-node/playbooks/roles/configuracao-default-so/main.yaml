@@ -7,3 +7,12 @@
   yum:
     name: git
     state: latest
+- name: Configurar hosts lab ansible # nome da taks
+  lineinfile:
+    dest: /etc/hosts
+    state: present
+    line: "{{item}}" # recebe uma lista de item 
+  with_items: # onde tem meus itens onde vai ser adicionado no etc/hosts
+    - 192.168.1.2 contorle-node
+    - 192.168.1.3 app01
+    - 192.168.1.4 db01
